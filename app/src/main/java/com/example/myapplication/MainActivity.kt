@@ -5,11 +5,14 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.github.barteksc.pdfviewer.PDFView
 import java.io.BufferedInputStream
 import java.io.InputStream
+import java.lang.Byte.decode
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.*
@@ -28,11 +31,17 @@ class MainActivity : AppCompatActivity() {
         pdfView = binding.idPDFView
         //Url de prueba
         var pdfUrl = "https://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf"
-        GetPDF(pdfView).execute(pdfUrl)
-        //Decodificador de base64 a byte
-        //val decodedBytes = Base64.getDecoder().decode(pdfUrlInput)
-        //val decodedString = String(decodedBytes)
-        //pdfView.fromBytes(decodedBytes)
+       // GetPDF(pdfView).execute(pdfUrl)
+        var pruebastring = "Hola"
+        // decodificar los datos codificados
+        val encoder: Base64.Encoder = Base64.getEncoder()
+        val encoded: String = encoder.encodeToString(pdfUrlInput.toByteArray())
+        Log.e("mensaje","${encoded}")
+
+        val decoder: Base64.Decoder = Base64.getDecoder()
+        val decoded = String(decoder.decode(pdfUrlInput))
+        Log.e("mensaje2","${decoded}")
+        pdfView.fromBytes(decoder.decode(pdfUrlInput))
 
     }
 
