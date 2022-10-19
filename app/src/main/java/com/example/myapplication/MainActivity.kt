@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.buttonPDF.setOnClickListener {
-            generatePDFFromBase64(input,"pruebapdf2")
+            generatePDFFromBase64(input,"pruebapdf")
         }
     }
 
